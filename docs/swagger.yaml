@@ -1,0 +1,23 @@
+basePath: /api/v1
+info:
+  contact: {}
+  description: Anki card.
+  title: Anki card API
+  version: "1.0"
+paths:
+  /ping:
+    get:
+      consumes:
+      - application/json
+      description: do ping
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: pong
+          schema:
+            type: string
+      summary: ping example
+      tags:
+      - ping
+swagger: "2.0"
