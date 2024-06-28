@@ -25,6 +25,6 @@ jobs:
 
     - name: Login Registry
       run: |
-       echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -username=${{ secrets.DOCKER_ACCOUNT }} --password-stdin ${{ vars.REGISTRY }} 
+       echo "${{ secrets.DOCKER_PWD }}" | docker login -username=${{ secrets.DOCKER_ACCOUNT }} --password-stdin ${{ vars.REGISTRY }} 
        docker push ${{ vars.REGISTRY }}/${{ vars.SPACE_NAME }}/anki-card:v0.0.1
         
