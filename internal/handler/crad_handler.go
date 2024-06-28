@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"anki-card/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,7 +15,5 @@ import (
 // @Success 200 {string} string "pong"
 // @Router /ping [get]
 func Ping(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"message": "pong",
-	})
+	c.JSON(200, utils.Success("pong"))
 }
