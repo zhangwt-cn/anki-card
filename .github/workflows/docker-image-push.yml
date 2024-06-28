@@ -21,7 +21,7 @@ jobs:
     - name: Build the Docker image
       run: |
         ls
-        docker build . --file Dockerfile --tag ${{ vars.REGISTRY }}/${{ vars.SPACE_NAME }}/anki-card:v0.0.1
+        docker build -t ${{ vars.REGISTRY }}/${{ vars.SPACE_NAME }}/anki-card:v0.0.1 .
 
     - name: Login Registry
       run: |
