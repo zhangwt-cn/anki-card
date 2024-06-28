@@ -11,7 +11,7 @@ COPY . .
 RUN go mod download
 
 # Build the Go app
-RUN go build -o /app/bin/anki-card ./cmd/anki-card/main.go
+RUN go build -ldflags="-s -w" -o /app/bin/anki-card ./cmd/anki-card/main.go
 
 # Use a smaller base image for the final build
 FROM alpine:latest
