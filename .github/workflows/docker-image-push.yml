@@ -1,0 +1,29 @@
+name: Docker Image Push
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      name: git pull
+
+      
+    - name: Build the Docker image
+      run: |
+        docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/${{ env.SPACE_NAME }}/anki-card:v0.0.1
+
+    - name: Login Registry
+      run: |
+       docker login -username=${{ secrets.DOCKER_ACCOUNT }} ${{ env.REGISTRY }} --password=${{ secrets.DOCKER_PWD }}
+       docker push ${{ env.REGISTRY }}/${{ env.SPACE_NAME }}/anki-card:v0.0.1
+        
