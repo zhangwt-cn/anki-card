@@ -1,11 +1,9 @@
 version: '3.8'
 
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  anki-crad:
+    image: registry.cn-hangzhou.aliyuncs.com/zhangwt/anki-card:v0.0.1
     ports:
       - "9527:9527"
-    environment:
-      - GIN_MODE=release
+    volumes:
+      - ./configs:/app/configs
