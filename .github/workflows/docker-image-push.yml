@@ -20,10 +20,10 @@ jobs:
       
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/${{ env.SPACE_NAME }}/anki-card:v0.0.1
+        docker build . --file Dockerfile --tag ${{ vars.REGISTRY }}/${{ vars.SPACE_NAME }}/anki-card:v0.0.1
 
     - name: Login Registry
       run: |
-       docker login -username=${{ secrets.DOCKER_ACCOUNT }} ${{ env.REGISTRY }} --password=${{ secrets.DOCKER_PWD }}
-       docker push ${{ env.REGISTRY }}/${{ env.SPACE_NAME }}/anki-card:v0.0.1
+       docker login -username=${{ secrets.DOCKER_ACCOUNT }} ${{ vars.REGISTRY }} --password=${{ secrets.DOCKER_PWD }}
+       docker push ${{ vars.REGISTRY }}/${{ vars.SPACE_NAME }}/anki-card:v0.0.1
         
