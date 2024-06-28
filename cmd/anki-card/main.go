@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"log"
 )
 
 // @title Anki card API
@@ -26,6 +27,7 @@ func main() {
 
 	err := router.Run(cfg.ServerPort)
 	if err != nil {
+		log.Fatalf("Failed to run server: %v", err)
 		return
 	}
 }
