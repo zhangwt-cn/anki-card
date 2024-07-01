@@ -1,4 +1,4 @@
-package utils
+package response
 
 import (
 	"net/http"
@@ -13,7 +13,7 @@ type Response struct {
 // Success response
 func Success(data interface{}) Response {
 	return Response{
-		Code:    200,
+		Code:    http.StatusOK,
 		Message: "Success",
 		Data:    data,
 	}
@@ -28,11 +28,11 @@ func Error(code int, message string) Response {
 }
 
 // BadRequest response
-func BadRequest(message string) {
-	Error(http.StatusBadRequest, message)
+func BadRequest(message string) Response {
+	return Error(http.StatusBadRequest, message)
 }
 
 // InternalServerError response
-func InternalServerError(message string) {
-	Error(http.StatusInternalServerError, message)
+func InternalServerError(message string) Response {
+	return Error(http.StatusInternalServerError, message)
 }

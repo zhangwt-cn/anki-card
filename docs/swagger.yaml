@@ -1,23 +1,50 @@
 basePath: /api/v1
+definitions:
+  request.CreateCard:
+    properties:
+      apiKey:
+        type: string
+      apiUrl:
+        type: string
+      material:
+        type: string
+    required:
+    - material
+    type: object
+  response.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
 info:
   contact: {}
   description: Anki card.
   title: Anki card API
   version: "1.0"
 paths:
-  /ping:
-    get:
+  /card/generate:
+    post:
       consumes:
       - application/json
-      description: do ping
+      description: Create  card
+      parameters:
+      - description: Create card
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateCard'
       produces:
       - application/json
       responses:
         "200":
-          description: pong
+          description: OK
           schema:
-            type: string
-      summary: ping example
+            $ref: '#/definitions/response.Response'
+      summary: Create card
       tags:
-      - ping
+      - card
 swagger: "2.0"

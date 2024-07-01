@@ -15,9 +15,9 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/ping": {
-            "get": {
-                "description": "do ping",
+        "/card/generate": {
+            "post": {
+                "description": "Create  card",
                 "consumes": [
                     "application/json"
                 ],
@@ -25,16 +25,58 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "ping"
+                    "card"
                 ],
-                "summary": "ping example",
-                "responses": {
-                    "200": {
-                        "description": "pong",
+                "summary": "Create card",
+                "parameters": [
+                    {
+                        "description": "Create card",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/request.CreateCard"
                         }
                     }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "request.CreateCard": {
+            "type": "object",
+            "required": [
+                "material"
+            ],
+            "properties": {
+                "apiKey": {
+                    "type": "string"
+                },
+                "apiUrl": {
+                    "type": "string"
+                },
+                "material": {
+                    "type": "string"
+                }
+            }
+        },
+        "response.Response": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {},
+                "message": {
+                    "type": "string"
                 }
             }
         }
