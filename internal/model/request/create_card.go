@@ -2,6 +2,7 @@ package request
 
 type CreateCard struct {
 	Material string `json:"material" binding:"required"`
-	ApiUrl   string `json:"apiUrl" `
-	ApiKey   string `json:"apiKey"`
+	Model    string `json:"model" binding:"required"`
+	ApiUrl   string `json:"apiUrl" binding:"required"`
+	ApiKey   string `json:"apiKey" binding:"required"`
 }

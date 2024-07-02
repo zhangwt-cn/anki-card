@@ -41,7 +41,7 @@ func makeOpenAIRequest(c request.CreateCard) (*request.ChatCompletionResponse, e
 	client := &http.Client{}
 
 	reqBody := request.ChatCompletionRequest{
-		Model: "gpt-4o",
+		Model: c.Model,
 		Messages: []request.Message{
 			{
 				Role:    "system",
