@@ -14,11 +14,13 @@ func LoadConfig() Config {
 	viper.SetConfigFile("configs/config.yaml")
 	err := viper.ReadInConfig()
 	if err != nil {
-		log.Fatalf("Error reading config file: %v", err)
+		log.Printf("Error reading config file: %v\n", err)
+		return Config{
+			ServerPort: ":9527",
+		}
 	}
 
 	return Config{
-		ServerPort:    viper.GetString("server.port"),
-		SwaggerEnable: viper.GetBool("swagger.enable"),
+		ServerPort: viper.GetString("server.port"),
 	}
 }

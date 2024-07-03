@@ -25,10 +25,9 @@ RUN upx -9 /app/bin/anki-card
 FROM alpine:latest
 
 # Copy the pre-built binary and config files from the builder stage
-COPY --from=builder /app/bin/anki-card /app/configs /app/
+COPY --from=builder /app/bin/anki-card /app/
+COPY --from=builder /app/configs /app/configs
 
-# Expose the port the app runs on
-EXPOSE 9527
 
 # Command to run the executable
 CMD ["/app/anki-card"]
