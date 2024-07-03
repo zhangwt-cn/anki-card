@@ -16,7 +16,7 @@ RUN apk add --no-cache upx binutils
 # Build the Go app
 RUN go build -ldflags="-s -w" -o /app/bin/anki-card ./cmd/anki-card/main.go
 
-RUN strip myapp
+RUN strip /app/bin/anki-card
 
 # Compress the binary
 RUN upx -9 /app/bin/anki-card
