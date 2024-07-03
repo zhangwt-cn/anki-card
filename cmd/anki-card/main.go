@@ -4,16 +4,13 @@ import (
 	v1 "anki-card/api/v1"
 	_ "anki-card/docs" // 引入生成的文档文件
 	"anki-card/internal/config"
-	"embed"
+	"anki-card/web"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"log"
 	"net/http"
 )
-
-//go:embed web/*
-var staticFiles embed.FS
 
 // @title Anki card API
 // @version 1.0
@@ -26,7 +23,7 @@ func main() {
 	v1.RegisterRoutes(router)
 
 	// Static file route
-	router.StaticFS("/", http.FS(staticFiles))
+	router.StaticFS("/index", http.FS(web.Web))
 
 	// Swagger route
 	if cfg.SwaggerEnable {
