@@ -2,12 +2,9 @@ package main
 
 import (
 	v1 "anki-card/api/v1"
-	_ "anki-card/docs" // 引入生成的文档文件
 	"anki-card/internal/config"
 	"anki-card/web"
 	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
 	"log"
 	"net/http"
 )
@@ -23,12 +20,7 @@ func main() {
 	v1.RegisterRoutes(router)
 
 	// Static file route
-	router.StaticFS("/index", http.FS(web.Web))
-
-	// Swagger route
-	if cfg.SwaggerEnable {
-		router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	}
+	router.StaticFS("/", http.FS(web.Web))
 
 	err := router.Run(cfg.ServerPort)
 	if err != nil {
