@@ -1,5 +1,5 @@
 # anki-card
-**anki-card** 基于`openai`接口，将知识点资料生成 **Anki** 记忆卡的工具🔧，目前仅支持基础模板格式
+**anki-card** 是基于`openai`接口，将知识点资料生成 **Anki** 记忆卡的工具🔧，目前仅支持基础模板格式
 ## 使用介绍
 <img width="858" alt="image" src="https://github.com/zhangwt-cn/anki-card/assets/52098594/2b2fae19-e3c4-4a81-b79b-bbf1a4b5b188">
 
