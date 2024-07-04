@@ -65,9 +65,9 @@ jobs:
             echo "Uploading $file"
             curl -XPOST \
               -H "Authorization: token ${{ secrets.TOKEN_GITHUB }}" \
-              -H "Content-Type: $(file --mime-type -b $file)" \
-              --data-binary @$file \
-              "${{ steps.create_release.outputs.upload_url }}?name=$(basename $file)"
+              -H "Content-Type: application/octet-stream" \
+              --data-binary @"$file" \
+              "${{ steps.create_release.outputs.upload_url }}?name=$(basename "$file")"
           done
         
 
