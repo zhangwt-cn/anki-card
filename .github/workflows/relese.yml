@@ -21,6 +21,8 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: true
           prerelease: false
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
 
 
   build:
@@ -54,7 +56,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ needs.create-release.outputs.upload_url }}
           asset_path: ./anki-card-${{ matrix.goos }}-${{ matrix.goarch }}.zip
           asset_name: anki-card-${{ matrix.goos }}-${{ matrix.goarch }}.zip
           asset_content_type: application/zip
