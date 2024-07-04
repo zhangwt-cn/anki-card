@@ -63,7 +63,7 @@ jobs:
 
 
   docker:
-    needs: release
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
