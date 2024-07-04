@@ -40,7 +40,7 @@ server:
 
 1. 拉取镜像
 ```bash copy
-docker pull zhangwt647/anki-card:v0.0.1
+docker pull zhangwt647/anki-card:latest
 ```
 
 2. 运行
@@ -49,7 +49,7 @@ sudo docker run -d \
   --name anki-card \
   -p 9527:9527 \
   -v $(pwd)/configs:/app/configs \
- zhangwt647/anki-card:v0.0.1
+ zhangwt647/anki-card:latest
 ```
 
 ### docker-compose 方式
@@ -60,7 +60,7 @@ version: '3.8'
 
 services:
   anki-card:
-    image: zhangwt647/anki-card:v0.0.1
+    image: zhangwt647/anki-card:latest
     ports:
       - "9527:9527"
     volumes:
