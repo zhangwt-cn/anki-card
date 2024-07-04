@@ -43,11 +43,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
-        with:
-          path: ./dist
-
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -59,14 +54,22 @@ jobs:
           draft: false
           prerelease: false
 
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: ./dist
 
-      - name: Upload release Assets
-        uses: alexellis/upload-assets@0.4.0
-        run: ls
+      - name: pwd
+        run: |
+          ls 
+          pwd
+
+      - name: Upload release binaries
+        uses: alexellis/upload-assets@0.2.2
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         with:
-          asset_paths: '["./dist/anki-card*"]'
+          asset_paths: '["dist/anki-card*"]'
 
 
   docker:
