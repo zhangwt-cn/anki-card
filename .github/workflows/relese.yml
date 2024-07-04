@@ -56,16 +56,16 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          draft: false
+          draft: true
           prerelease: false
 
-      - name: Upload Release Assets
-        run: |
-          for file in ./dist/*; do
-            gh release upload ${{ github.ref }} "$file"
-          done
+
+      - name: Upload release Assets
+        uses: alexellis/upload-assets@0.4.0
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+        with:
+          asset_paths: '["./dist/anki-card*"]'
 
 
   docker:
