@@ -56,14 +56,13 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          draft: true
+          draft: false
           prerelease: false
 
 
       - name: Upload release Assets
         uses: alexellis/upload-assets@0.4.0
-        run: |
-          ls
+        run: ls
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         with:
