@@ -26,7 +26,7 @@ jobs:
 
       - name: Build the project
         run: |
-          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o anki-card-${{ matrix.goos }}-${{ matrix.goarch }}
+          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -ldflags="-s -w" -o anki-card-${{ matrix.goos }}-${{ matrix.goarch }} ./cmd/anki-card/main.go
 
       - name: Archive the build output
         run: |
