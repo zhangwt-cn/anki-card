@@ -51,7 +51,7 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          draft: false
+          draft: true
           prerelease: false
 
       - name: Download artifacts
@@ -59,17 +59,17 @@ jobs:
         with:
           path: ./dist
 
-      - name: pwd
+      - name: Upload Release Assets
         run: |
-          ls 
-          pwd
-
-      - name: Upload release binaries
-        uses: alexellis/upload-assets@0.2.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
-        with:
-          asset_paths: '["dist/anki-card*"]'
+          for file in ./dist/*; do
+            echo "Uploading $file"
+            curl -XPOST \
+              -H "Authorization: token ${{ secrets.TOKEN_GITHUB }}" \
+              -H "Content-Type: $(file --mime-type -b $file)" \
+              --data-binary @$file \
+              "${{ steps.create_release.outputs.upload_url }}?name=$(basename $file)"
+          done
+        
 
 
   docker:
