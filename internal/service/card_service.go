@@ -45,7 +45,7 @@ func makeOpenAIRequest(c request.CreateCard) (*request.ChatCompletionResponse, e
 		Messages: []request.Message{
 			{
 				Role:    "system",
-				Content: "你是一个学者,需要将以下材料中的知识点转换为Anki卡片,不需要使用markdown语法,只返回生成后的json,json格式是[{\"question\":\"\",\"answer\":\"\"}]",
+				Content: "你是一个学者,你需要在以下材料中提取出所有的知识点转换为Anki卡片,不需要使用markdown语法,只返回生成后的json,json格式是[{\"question\":\"\",\"answer\":\"\"}]",
 			},
 			{
 				Role:    "user",
