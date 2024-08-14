@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 )
 
 // GenerateCard generate card
@@ -27,6 +28,10 @@ func basic(req request.CreateCard) ([]response.BasicCard, error) {
 	choice := resp.Choices[0]
 	cardJson := choice.Message.Content
 
+	// replace ```json and ``` with empty string
+	cardJson = strings.ReplaceAll(cardJson, "```json", "")
+	cardJson = strings.ReplaceAll(cardJson, "```", "")
+
 	var cards []response.BasicCard
 	// json -> cards
 	err = json.Unmarshal([]byte(cardJson), &cards)
@@ -45,7 +50,7 @@ func makeOpenAIRequest(c request.CreateCard) (*request.ChatCompletionResponse, e
 		Messages: []request.Message{
 			{
 				Role:    "system",
-				Content: "你是一个学者,你需要在以下材料中提取出所有的知识点转换为Anki卡片,如果材料中包含数学公式，也需要提取出来,只返回生成后的json,json格式是[{\"question\":\"\",\"answer\":\"\"}]",
+				Content: "提取以下材料中的所有知识点并将其转换为Anki卡片格式。每个知识点的提取要必须严格遵循以下规则：\n1. 对于每个知识点，生成一个问题和答案对。\n2. 如果材料中包含MarkDown数学公式，将其保持原样提取出来并在公式的前后加上空格。\n3. 最终输出为JSON格式，每个知识点对应一个JSON对象，格式为： [{\"question\":\"\",\"answer\":\"\"}]\n4. 确保生成的JSON可以直接被代码解析，不包含多余的符号或字符，如```json等代码块标记。\n",
 			},
 			{
 				Role:    "user",
